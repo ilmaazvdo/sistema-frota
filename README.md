@@ -15,7 +15,7 @@
 | :--- | :--- | :--- |
 | Ilma Rodrigues Vieira Azevedo | 2025015455 | Domínio Core e POO Avançado |
 | José Nataniel Gomes Pereira | 2025015698 | Serviços, Regras de Negócio e Persistência |
-| Erislânio Jacó da Silva | 2025015203 | Interface CLI e Testes Unitários |
+| Gyan Carlos Mateus de Oliveira | 2025015339 | Interface CLI e Testes Unitários |
 
 ## 📑 Documentação da Entrega 1
 
