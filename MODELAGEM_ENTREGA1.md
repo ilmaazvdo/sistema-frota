@@ -43,7 +43,6 @@ Este diagrama UML ilustra as relações de Herança e a aplicação dos Mixins.
 | **Validação CNH** | CNH compatível com o tipo de veículo. Mapeamento formalizado. | Exceção customizada: `CNHIncompativelError` |
 | **Bloqueio de Alocação**| Veículo deve ter status **ATIVO** para ser alocado. | Exceção customizada: `VeiculoIndisponivelError` |
 | **Interface `alocar_veiculo`**| `FrotaService.alocar_veiculo(placa: str, cpf: str, destino: str) -> Viagem` | Garante a tipagem e o retorno da entidade Viagem. |
-
 ### 4. Plano de Testes Unitários
 
 | Área de Teste | Caso de Teste Essencial | Responsável |
@@ -51,6 +50,7 @@ Este diagrama UML ilustra as relações de Herança e a aplicação dos Mixins.
 | **Regras** | Alocação de Motorista B (Carro) para um Caminhão (CNH C/D/E). | José Nataniel |
 | **POO** | Ordenação de veículos por quilometragem (`sorted()` funciona). | Ilma Rodrigues |
 | **Persistência** | Teste de CRUD (salvar/carregar) para garantir a integridade do JSON. | José Nataniel |
+| **Interface** | Teste de comandos básicos da CLI e validação de entrada. | Gyan Carlos |
 
 ### 5. Divisão de Responsabilidades da Equipe (3 Membros)
 
@@ -58,4 +58,4 @@ Este diagrama UML ilustra as relações de Herança e a aplicação dos Mixins.
 | :--- | :--- | :--- | :--- |
 | **Ilma Rodrigues Vieira Azevedo** | 2025015455 | **Tech Lead / Domínio Core** | Implementação das Classes Base (`Veiculo`, `Motorista`, `Pessoa`). Implementação dos **Mixins** e **Métodos Especiais**. |
 | **José Nataniel Gomes Pereira** | 2025015698 | **Serviços, Regras de Negócio e Persistência** | Implementação de **`FrotaService`** e **Regras de Negócio**. Implementação do **Repository** e `settings.json`. |
-| **Erislânio Jacó da Silva** | 2025015203 | **Interface CLI e Testes Unitários** | Desenvolvimento da Interface de **Linha de Comando (CLI)**. Criação e execução dos **Testes Unitários** para todas as camadas. |
+| **Gyan Carlos Mateus de Oliveira**| 2025015339 | **Interface CLI e Testes Unitários** | Desenvolvimento da Interface de **Linha de Comando (CLI)**. Criação e execução dos **Testes Unitários** para todas as camadas. |
