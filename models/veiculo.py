@@ -1,13 +1,18 @@
-from abc import ABC
+from abc import ABC, abstractmethod
+# Note o ponto '.' antes de mixins e exceptions (importante!)
 from .mixins import AbastecivelMixin, ManutenivelMixin
+from .exceptions import AlocacaoInvalidaError
 
 class Veiculo(ABC):
-    def __init__(self, placa, modelo, km_atual, consumo_medio):
-        self._placa = placa  # Encapsulamento (Privado)
-        self._quilometragem = km_atual
+    def __init__(self, placa: str, modelo: str, ano: int, quilometragem: float = 0.0):
+        self._placa = placa
         self.modelo = modelo
-        self.consumo_medio = consumo_medio
-        self._status = "ATIVO"
+        self.ano = ano
+        self._quilometragem = quilometragem 
+
+    @property
+    def placa(self):
+        return self._placa
 
     @property
     def quilometragem(self):
@@ -16,27 +21,52 @@ class Veiculo(ABC):
     @quilometragem.setter
     def quilometragem(self, valor):
         if valor < self._quilometragem:
-            raise ValueError("A quilometragem não pode retroceder.")
+            raise ValueError("Quilometragem não pode ser reduzida.")
         self._quilometragem = valor
 
-    # Métodos Especiais Requeridos
-    def __eq__(self, outro):
-        return self._placa == outro._placa
-
-    def __lt__(self, outro):
-        return self._quilometragem < outro._quilometragem
+    @property
+    @abstractmethod
+    def tipo_veiculo(self) -> str:
+        pass
 
     def __str__(self):
-        return f"{self.modelo} ({self._placa})"
+        return f"[{self.tipo_veiculo.upper()}] {self.modelo} - Placa: {self.placa} - Km: {self.quilometragem}"
 
-class Carro(Veiculo, AbastecivelMixin):
-    def __init__(self, placa, modelo, km_atual, consumo_medio):
-        Veiculo.__init__(self, placa, modelo, km_atual, consumo_medio)
-        AbastecivelMixin.__init__(self)
+    def __eq__(self, other):
+        return self.placa == other.placa
 
-class Caminhao(Veiculo, AbastecivelMixin, ManutenivelMixin):
-    def __init__(self, placa, modelo, km_atual, consumo_medio, cap_ton):
-        Veiculo.__init__(self, placa, modelo, km_atual, consumo_medio)
+    def __lt__(self, other):
+        return self.quilometragem < other.quilometragem
+
+class Carro(Veiculo, AbastecivelMixin, ManutenivelMixin):
+    def __init__(self, placa, modelo, ano, quilometragem=0.0):
+        Veiculo.__init__(self, placa, modelo, ano, quilometragem)
         AbastecivelMixin.__init__(self)
         ManutenivelMixin.__init__(self)
-        self.capacidade_toneladas = cap_ton
+
+    @property
+    def tipo_veiculo(self):
+        return "carro"
+    
+    def __iter__(self):
+        return iter(self._historico_manutencoes)
+
+class Moto(Veiculo, AbastecivelMixin, ManutenivelMixin):
+    def __init__(self, placa, modelo, ano, quilometragem=0.0):
+        Veiculo.__init__(self, placa, modelo, ano, quilometragem)
+        AbastecivelMixin.__init__(self)
+        ManutenivelMixin.__init__(self)
+
+    @property
+    def tipo_veiculo(self):
+        return "moto"
+
+class Caminhao(Veiculo, AbastecivelMixin, ManutenivelMixin):
+    def __init__(self, placa, modelo, ano, quilometragem=0.0):
+        Veiculo.__init__(self, placa, modelo, ano, quilometragem)
+        AbastecivelMixin.__init__(self)
+        ManutenivelMixin.__init__(self)
+
+    @property
+    def tipo_veiculo(self):
+        return "caminhao"
