@@ -4,8 +4,8 @@
 
 | Entrega | Foco Principal | Status | Branch de Trabalho |
 | :--- | :--- | :--- | :--- |
-| **Entrega 1** | Modelagem de Classes e Regras | **CONCLUÍDA** | `entrega1/levantamento-classes` |
-| **Entrega 2** | Implementação do Domínio (Classes e Mixins) | PENDENTE | `entrega2/implementacao-dominio` |
+| **Entrega 1** | Modelagem de Classes e Regras | **CONCLUÍDA** | `main` |
+| **Entrega 2** | Implementação do Domínio (Classes e Mixins) | **EM ANDAMENTO** | `main` |
 
 ---
 
@@ -13,12 +13,21 @@
 
 | Membro | Matrícula | Foco Principal |
 | :--- | :--- | :--- |
-| Ilma Rodrigues Vieira Azevedo | 2025015455 | Domínio Core e POO Avançado |
+| Ilma Rodrigues Vieira Azevedo | 2025015455 | Tech Lead - Domínio Core e POO Avançado |
 | José Nataniel Gomes Pereira | 2025015698 | Serviços, Regras de Negócio e Persistência |
-| Gyan Carlos Mateus de Oliveira | 2025015339 | Interface CLI e Testes Unitários |
+| Gyan Carlos Mateus de Oliveira | 2025015339 | Mixins, Exceções e Interface CLI |
 
-## 📑 Documentação da Entrega 1
+---
 
-A modelagem completa, incluindo o diagrama conceitual, especificações de regras de negócio e plano de testes, está detalhada no arquivo:
+## 🛠️ Progresso da Entrega 2
 
-* **[MODELAGEM_ENTREGA1.md](MODELAGEM_ENTREGA1.md)**
+A arquitetura do sistema foi refatorada para um modelo de pacotes profissional:
+
+- **Pacote `models/`**: Centraliza a lógica de negócio.
+- **Abstração e Herança**: Implementação de classes abstratas (ABC) e herança múltipla com Mixins.
+- **Encapsulamento**: Uso de `@property` e setters para validação de dados (ex: quilometragem).
+- **Métodos Especiais**: Implementação de `__str__`, `__eq__` (comparação de placas) e `__lt__` (ordenação por KM).
+
+## 📑 Documentação de Referência
+
+* **[MODELAGEM_ENTREGA1.md](MODELAGEM_ENTREGA1.md)** - Planejamento inicial e Diagrama de Classes.
