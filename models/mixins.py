@@ -1,5 +1,5 @@
 from datetime import datetime
-from exceptions import ManutencaoInvalidaError
+from models.exceptions import ManutencaoInvalidaError
 
 class AbastecivelMixin:
     def __init__(self):
@@ -32,3 +32,4 @@ class ManutenivelMixin:
     
     def finalizar_manutencao(self):
         self._em_manutencao = False
+
