@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from .mixins import AbastecivelMixin, ManutenivelMixin
+from models.mixins import AbastecivelMixin, ManutenivelMixin
 
 class Veiculo(ABC):
     def __init__(self, placa: str, modelo: str, ano: int, quilometragem: float = 0.0):
