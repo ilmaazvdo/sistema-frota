@@ -22,7 +22,11 @@ class Motorista(Pessoa):
     def cnh_valida(self):
         """Verifica se a CNH está dentro do prazo de validade"""
         return self.validade_cnh > datetime.now()
-
+    
+    def __str__(self):
+        validade_formatada = self.validade_cnh.strftime("%d/%m/%Y")
+        return f"Motorista: {self.nome} | CNH ({self.categoria_cnh}): {self.cnh} | Validade: {validade_formatada}"
+    
     def __repr__(self):
         status = "VÁLIDA" if self.cnh_valida() else "EXPIRADA"
         return f"Motorista({self.nome}, CNH: {self.categoria_cnh}, Status: {status})"
