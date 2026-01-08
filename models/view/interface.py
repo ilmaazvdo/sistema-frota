@@ -4,11 +4,15 @@ import os
 from models.veiculo import Carro, Moto, Caminhao, Veiculo
 from models.motorista import Motorista
 from models.exceptions import FrotaError
+from models.servicos import FrotaRepository, FrotaService
 
 class CLI:
     def __init__(self):
         self.frota = []
         self.motoristas = []
+        # Integração com JSON
+        self.repo = FrotaRepository()
+        self.service = FrotaService(self.repo)
 
     def limpar_tela(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -71,35 +75,25 @@ class CLI:
             return
 
         self.frota.append(veiculo)
+        self.service.registrar_veiculo(veiculo)  # salva no JSON
         print(f"Veículo {modelo} ({placa}) cadastrado com sucesso!")
 
     def listar_frota(self):
         print("\n--- Frota Atual ---")
-        if not self.frota:
+        relatorio = self.service.gerar_relatorio()
+        if not relatorio["veiculos"]:
             print("Nenhum veículo cadastrado.")
             return
-        
-        # Ordenação mágica usando __lt__ definido em veiculo.py
-        frota_ordenada = sorted(self.frota)
-        
-        for v in frota_ordenada:
-            print(v) # Usa o __str__ definido em veiculo.py
-
-    def _buscar_veiculo(self, placa):
-        # Usa o __eq__ definido em veiculo.py para comparação
-        # Criamos um objeto dummy apenas para comparação ou iteramos manualmente
-        for v in self.frota:
-            if v.placa == placa:
-                return v
-        return None
+        for v in relatorio["veiculos"]:
+            print(v)
 
     def atualizar_km(self):
         placa = input("Placa do veículo: ")
         veiculo = self._buscar_veiculo(placa)
         if veiculo:
             novo_km = float(input("Nova KM: "))
-            # O setter validará se a KM retrocede
             veiculo.quilometragem = novo_km 
+            self.service.registrar_veiculo(veiculo)  # atualiza no JSON
             print("Quilometragem atualizada.")
         else:
             print("Veículo não encontrado.")
@@ -107,26 +101,24 @@ class CLI:
     def registrar_abastecimento(self):
         placa = input("Placa do veículo: ")
         veiculo = self._buscar_veiculo(placa)
-        
-        # Verifica se possui o Mixin Abastecivel (todos possuem na estrutura atual)
         if veiculo and hasattr(veiculo, 'abastecer'):
             litros = float(input("Litros: "))
             valor = float(input("Valor total: "))
             tipo_comb = input("Tipo Combustível: ")
-            veiculo.abastecer(litros, valor, tipo_comb) #
+            veiculo.abastecer(litros, valor, tipo_comb)
+            self.service.registrar_veiculo(veiculo)  # salva histórico no JSON
         else:
             print("Veículo não encontrado ou não suporta abastecimento.")
 
     def registrar_manutencao(self):
         placa = input("Placa do veículo: ")
         veiculo = self._buscar_veiculo(placa)
-        
-        # Verifica se possui o Mixin Manutenivel (Moto não possui)
         if veiculo and hasattr(veiculo, 'registrar_manutencao'):
             tipo = input("Tipo (preventiva/corretiva): ")
             custo = float(input("Custo: "))
             desc = input("Descrição: ")
-            veiculo.registrar_manutencao(tipo, custo, desc) #
+            veiculo.registrar_manutencao(tipo, custo, desc)
+            self.service.registrar_veiculo(veiculo)  # salva no JSON
             print(f"Manutenção registrada. Veículo em manutenção: {veiculo._em_manutencao}")
         elif veiculo:
             print(f"O veículo do tipo '{veiculo.tipo_veiculo}' não suporta registro de manutenção.")
@@ -143,8 +135,16 @@ class CLI:
         
         mt = Motorista(nome, cpf, cnh, cat, validade)
         self.motoristas.append(mt)
-        print(mt) # Usa __repr__ do motorista.py
+        self.service.registrar_motorista(mt)  # salva no JSON
+        print(mt)
 
+    def _buscar_veiculo(self, placa):
+        for v in self.frota:
+            if v.placa == placa:
+                return v
+        return None
+
+# Bloco principal para rodar o menu
 if __name__ == "__main__":
     try:
         app = CLI()
