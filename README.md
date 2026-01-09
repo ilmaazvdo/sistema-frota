@@ -1,33 +1,29 @@
-# 🚗 UFCA - POO: Sistema de Gerenciamento de Frota de Veículos
+# 🚚 Sistema de Gestão de Frota
 
-## Status do Projeto
+Projeto desenvolvido para a disciplina de Programação Orientada a Objetos (POO). O sistema foca na organização, monitoramento e manutenção de uma frota de veículos e seus respectivos motoristas.
 
-| Entrega | Foco Principal | Status | Branch de Trabalho |
-| :--- | :--- | :--- | :--- |
-| **Entrega 1** | Modelagem de Classes e Regras | **CONCLUÍDA** | `main` |
-| **Entrega 2** | Implementação do Domínio (Classes e Mixins) | **EM ANDAMENTO** | `main` |
+## 🏗️ Estrutura do Projeto (MVC)
+O projeto utiliza a arquitetura MVC (Model-View-Controller) para garantir a separação de responsabilidades:
+- **Models**: Contém a lógica de negócio, classes principais e regras de validação.
+- **View**: Interface de interação com o usuário.
+- **Raiz (main.py)**: Ponto de entrada que integra e executa o sistema.
 
----
 
-## 👥 Membros da Equipe
 
-| Membro | Matrícula | Foco Principal |
-| :--- | :--- | :--- |
-| Ilma Rodrigues Vieira Azevedo | 2025015455 | Tech Lead - Domínio Core e POO Avançado |
-| José Nataniel Gomes Pereira | 2025015698 | Serviços, Regras de Negócio e Persistência |
-| Gyan Carlos Mateus de Oliveira | 2025015339 | Mixins, Exceções e Interface CLI |
+## 🛠️ Tecnologias e Conceitos Aplicados
+Este projeto inicial já contempla conceitos avançados de POO:
+- **Classes Abstratas (ABC)**: Garantindo o polimorfismo entre tipos de veículos.
+- **Mixins**: Implementação de herança múltipla para comportamentos de *Abastecimento* e *Manutenção*.
+- **Tratamento de Exceções**: Criação de erros customizados para regras de negócio (ex: CNH vencida ou veículo em manutenção).
+- **Encapsulamento**: Uso de `@property` e `@setter` para proteção de dados sensíveis como Placa e Quilometragem.
 
----
+## 👥 Equipe
+- **Ilma Azevedo** (Tech Lead)
+- **Nataniel**
+- **Gyan**
 
-## 🛠️ Progresso da Entrega 2
-
-A arquitetura do sistema foi refatorada para um modelo de pacotes profissional:
-
-- **Pacote `models/`**: Centraliza a lógica de negócio.
-- **Abstração e Herança**: Implementação de classes abstratas (ABC) e herança múltipla com Mixins.
-- **Encapsulamento**: Uso de `@property` e setters para validação de dados (ex: quilometragem).
-- **Métodos Especiais**: Implementação de `__str__`, `__eq__` (comparação de placas) e `__lt__` (ordenação por KM).
-
-## 📑 Documentação de Referência
-
-* **[MODELAGEM_ENTREGA1.md](MODELAGEM_ENTREGA1.md)** - Planejamento inicial e Diagrama de Classes.
+## 🚀 Como Executar
+1. Certifique-se de ter o Python 3.x instalado.
+2. Clone o repositório:
+   ```bash
+   git clone [https://github.com/ilmaazvdo/sistema-frota.git](https://github.com/ilmaazvdo/sistema-frota.git)
