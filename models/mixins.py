@@ -34,3 +34,7 @@ class ManutenivelMixin:
     
     def finalizar_manutencao(self):
         self._em_manutencao = False
+
+    @property
+    def em_manutencao(self):
+        return self._em_manutencao
