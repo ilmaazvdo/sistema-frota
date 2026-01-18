@@ -1,0 +1,19 @@
+{
+  "configuracoes_sistema": {
+    "nome_projeto": "Sistema de Gestão de Frota - UFCA",
+    "unidade_medida": "km",
+    "limite_revisao": 10000
+  },
+  "validacoes": {
+    "cnh_requerida": {
+      "Moto": "A",
+      "Carro": "B",
+      "Caminhao": "C"
+    },
+    "permitir_km_retrogrado": false
+  },
+  "equipe": {
+    "tech_leader": "Ilma Rodrigues V Azevedo",
+    "membros": ["Gyan", "Jose Nataniel"]
+  }
+}
