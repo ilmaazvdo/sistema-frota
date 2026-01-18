@@ -1,17 +1,6 @@
 import abc
+from .mixins import AbastecivelMixin, ManutenivelMixin
 
-class AbastecivelMixin:
-    def __init__(self):
-        self.historico_abastecimento = []
-    def registrar_abastecimento(self, litros, valor):
-        self.historico_abastecimento.append({"litros": litros, "valor": valor})
-        return "Abastecimento registrado."
-
-class ManutenivelMixin:
-    def entrar_manutencao(self):
-        self.status = "MANUTENCAO"
-
-# O 'abc.ABC' torna a classe Abstrata - requisito de POO avançada
 class Veiculo(abc.ABC):
     def __init__(self, placa, marca, modelo, ano, km, consumo, tipo):
         self._placa = placa
@@ -35,7 +24,6 @@ class Veiculo(abc.ABC):
             raise ValueError("KM não pode retroceder!")
         self._quilometragem = valor
 
-    # Métodos Mágicos exigidos (4)
     def __str__(self): return f"{self.modelo} [{self._placa}]"
     def __eq__(self, outro): return self._placa == outro.placa
     def __lt__(self, outro): return self._quilometragem < outro.quilometragem
@@ -55,4 +43,4 @@ class Caminhao(Veiculo, AbastecivelMixin, ManutenivelMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         AbastecivelMixin.__init__(self)
-        # Caminhão herda de Veiculo + Abastecivel + Manutenivel (HERANÇA MÚLTIPLA)
+        ManutenivelMixin.__init__(self)
