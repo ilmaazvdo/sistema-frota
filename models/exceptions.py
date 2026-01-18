@@ -1,31 +1,36 @@
+"""
+Módulo de Exceções Customizadas - Camada de Domínio
+Desenvolvido por: Ilma Rodrigues V Azevedo (Tech Leader)
+"""
+
 class FrotaError(Exception):
-    """Erro genérico da frota"""
+    """Classe base para todas as exceções do sistema de frota."""
     pass
 
 class ManutencaoInvalidaError(FrotaError):
-    """Erro para manutenção inválida"""
+    """Lançada quando uma operação de manutenção viola as regras de negócio."""
     pass
 
 class AlocacaoInvalidaError(FrotaError):
-    """Erro para alocação inválida de veículo/motorista"""
+    """Lançada quando um motorista não pode ser alocado a um veículo (ex: CNH incompatível)."""
     pass
 
 class PoliticaNaoAtendidaError(FrotaError):
-    """Erro quando alguma política de uso não é atendida"""
+    """Lançada quando uma política de uso (ex: limite de KM para revisão) não é atendida."""
     pass
 
 class VeiculoIndisponivelError(FrotaError):
-    """Erro quando o veículo não pode ser usado (ex: em manutenção)"""
+    """Lançada quando o veículo está em manutenção ou inativo e tentam utilizá-lo."""
     pass
 
 class MotoristaInvalidoError(FrotaError):
-    """Erro quando o motorista não atende aos requisitos"""
+    """Lançada quando os dados do motorista não atendem aos requisitos do sistema."""
     pass
 
 class VeiculoNaoEncontradoError(FrotaError):
-    """Erro quando o veículo não é encontrado no sistema"""
+    """Lançada quando uma busca por placa não retorna resultados."""
     pass
 
 class MotoristaNaoEncontradoError(FrotaError):
-    """Erro quando o motorista não é encontrado no sistema"""
+    """Lançada quando uma busca por CPF não retorna resultados."""
     pass
